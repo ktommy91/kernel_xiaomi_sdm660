@@ -623,27 +623,6 @@ static inline int atomic_dec_if_positive(atomic_t *v)
 }
 #endif
 
-/**
- * atomic_fetch_or - perform *p |= mask and return old value of *p
- * @p: pointer to atomic_t
- * @mask: mask to OR on the atomic_t
- */
-#ifndef atomic_fetch_or
-static inline int atomic_fetch_or(atomic_t *p, int mask)
-{
-	int old, val = atomic_read(p);
-
-	for (;;) {
-		old = atomic_cmpxchg(p, val, val | mask);
-		if (old == val)
-			break;
-		val = old;
-	}
-
-	return old;
-}
-#endif
-
 #define atomic_cond_read_acquire(v, c)	smp_cond_load_acquire(&(v)->counter, (c))
 
 #ifdef CONFIG_GENERIC_ATOMIC64
