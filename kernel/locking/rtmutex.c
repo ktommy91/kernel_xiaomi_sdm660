@@ -1614,7 +1614,11 @@ EXPORT_SYMBOL_GPL(__rt_mutex_init);
  * @proxy_owner:the task to set as owner
  *
  * No locking. Caller has to do serializing itself
- * Special API call for PI-futex support
+ *
+ * Special API call for PI-futex support. This initializes the rtmutex and
+ * assigns it to @proxy_owner. Concurrent operations on the rtmutex are not
+ * possible at this point because the pi_state which contains the rtmutex
+ * is not yet visible to other tasks.
  */
 void rt_mutex_init_proxy_locked(struct rt_mutex *lock,
 				struct task_struct *proxy_owner)
@@ -1631,7 +1635,11 @@ void rt_mutex_init_proxy_locked(struct rt_mutex *lock,
  * @lock: 	the rt_mutex to be locked
  *
  * No locking. Caller has to do serializing itself
- * Special API call for PI-futex support
+ *
+ * Special API call for PI-futex support. This merrily cleans up the rtmutex
+ * (debugging) state. Concurrent operations on this rt_mutex are not
+ * possible because it belongs to the pi_state which is about to be freed
+ * and it is not longer visible to other tasks.
  */
 void rt_mutex_proxy_unlock(struct rt_mutex *lock,
 			   struct task_struct *proxy_owner)
