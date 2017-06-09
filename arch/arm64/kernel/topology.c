@@ -19,13 +19,18 @@
 #include <linux/nodemask.h>
 #include <linux/of.h>
 #include <linux/sched.h>
-#include <linux/sched.h>
 #include <linux/sched_energy.h>
 
 #include <asm/cputype.h>
 #include <asm/topology.h>
 
 static DEFINE_PER_CPU(unsigned long, cpu_scale) = SCHED_CAPACITY_SCALE;
+static DEFINE_PER_CPU(unsigned long, cpu_efficiency) = SCHED_CAPACITY_SCALE;
+
+unsigned long arch_get_cpu_efficiency(int cpu)
+{
+	return per_cpu(cpu_efficiency, cpu);
+}
 
 unsigned long scale_cpu_capacity(struct sched_domain *sd, int cpu)
 {
@@ -292,6 +297,11 @@ static void update_cpu_capacity(unsigned int cpu)
 		cpu, arch_scale_cpu_capacity(NULL, cpu));
 }
 
+void update_cpu_power_capacity(int cpu)
+{
+	update_cpu_capacity(cpu);
+}
+
 static void update_siblings_masks(unsigned int cpuid)
 {
 	struct cpu_topology *cpu_topo, *cpuid_topo = &cpu_topology[cpuid];
@@ -353,7 +363,6 @@ void store_cpu_topology(unsigned int cpuid)
 
 topology_populated:
 	update_siblings_masks(cpuid);
-	update_cpu_capacity(cpuid);
 }
 
 static void __init reset_cpu_topology(void)
