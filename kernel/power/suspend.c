@@ -618,6 +618,7 @@ int pm_suspend(suspend_state_t state)
 
 	pm_suspend_marker("entry");
 	gpio_set_value(slst_gpio_base_id + PROC_AWAKE_ID, 0);
+	pr_info("PM: suspend entry (%s)\n", pm_states[state]);
 	error = enter_state(state);
 	gpio_set_value(slst_gpio_base_id + PROC_AWAKE_ID, 1);
 	if (error) {
@@ -627,6 +628,7 @@ int pm_suspend(suspend_state_t state)
 		suspend_stats.success++;
 	}
 	pm_suspend_marker("exit");
+	pr_info("PM: suspend exit\n");
 	return error;
 }
 EXPORT_SYMBOL(pm_suspend);
