@@ -44,14 +44,10 @@ u32 mmc_vddrange_to_ocrmask(int vdd_min, int vdd_max);
 
 static inline void mmc_delay(unsigned int ms)
 {
-	if (ms < 1000 / HZ) {
-		cond_resched();
-		mdelay(ms);
-	} else if (ms < jiffies_to_msecs(2)) {
-		usleep_range(ms * 1000, (ms + 1) * 1000);
-	} else {
+	if (ms <= 20)
+		usleep_range(ms * 1000, ms * 1250);
+	else
 		msleep(ms);
-	}
 }
 
 void mmc_rescan(struct work_struct *work);
