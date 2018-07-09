@@ -5053,9 +5053,9 @@ static inline unsigned long cpu_util(int cpu);
 
 static bool __cpu_overutilized(int cpu, int delta);
 static bool cpu_overutilized(int cpu);
-unsigned long boosted_cpu_util(int cpu);
+unsigned long boosted_cpu_util(int cpu, unsigned long other_util);
 #else
-#define boosted_cpu_util(cpu) cpu_util_freq(cpu)
+#define boosted_cpu_util(cpu, other_util) cpu_util_freq(cpu)
 #endif
 
 static unsigned long cpu_util_without(int cpu, struct task_struct *p);
@@ -6390,9 +6390,9 @@ schedtune_task_margin(struct task_struct *task)
 #endif /* CONFIG_SCHED_TUNE */
 
 unsigned long
-boosted_cpu_util(int cpu)
+boosted_cpu_util(int cpu, unsigned long other_util)
 {
-	unsigned long util = cpu_util_freq(cpu);
+	unsigned long util = cpu_util_freq(cpu) + other_util;
 	long margin = schedtune_cpu_margin(util, cpu);
 
 //	trace_sched_boost_cpu(cpu, util, margin);
