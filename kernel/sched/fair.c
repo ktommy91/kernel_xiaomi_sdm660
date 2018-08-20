@@ -876,7 +876,7 @@ static void update_curr(struct cfs_rq *cfs_rq)
 	if (entity_is_task(curr)) {
 		struct task_struct *curtask = task_of(curr);
 
-		trace_sched_stat_runtime(curtask, delta_exec, curr->vruntime);
+//		trace_sched_stat_runtime(curtask, delta_exec, curr->vruntime);
 		cpuacct_charge(curtask, delta_exec);
 		account_group_exec_runtime(curtask, delta_exec);
 	}
@@ -919,7 +919,7 @@ update_stats_wait_end(struct cfs_rq *cfs_rq, struct sched_entity *se)
 			se->statistics.wait_start = delta;
 			return;
 		}
-		trace_sched_stat_wait(p, delta);
+//		trace_sched_stat_wait(p, delta);
 	}
 
 	se->statistics.wait_max = max(se->statistics.wait_max, delta);
@@ -1729,14 +1729,14 @@ static int task_numa_migrate(struct task_struct *p)
 
 	if (env.best_task == NULL) {
 		ret = migrate_task_to(p, env.best_cpu);
-		if (ret != 0)
-			trace_sched_stick_numa(p, env.src_cpu, env.best_cpu);
+//		if (ret != 0)
+//			trace_sched_stick_numa(p, env.src_cpu, env.best_cpu);
 		return ret;
 	}
 
 	ret = migrate_swap(p, env.best_task);
-	if (ret != 0)
-		trace_sched_stick_numa(p, env.src_cpu, task_cpu(env.best_task));
+//	if (ret != 0)
+//		trace_sched_stick_numa(p, env.src_cpu, task_cpu(env.best_task));
 	put_task_struct(env.best_task);
 	return ret;
 }
@@ -2796,7 +2796,7 @@ __update_load_avg(u64 now, int cpu, struct sched_avg *sa,
 
 	scale_freq = arch_scale_freq_capacity(NULL, cpu);
 	scale_cpu = arch_scale_cpu_capacity(NULL, cpu);
-	trace_sched_contrib_scale_f(cpu, scale_freq, scale_cpu);
+	//trace_sched_contrib_scale_f(cpu, scale_freq, scale_cpu);
 
 	/* delta_w is the amount already accumulated against our next period */
 	delta_w = sa->period_contrib;
@@ -3253,8 +3253,8 @@ update_cfs_rq_load_avg(u64 now, struct cfs_rq *cfs_rq, bool update_freq)
 #endif
 
 	/* Trace CPU load, unless cfs_rq belongs to a non-root task_group */
-	if (cfs_rq == &rq_of(cfs_rq)->cfs)
-		trace_sched_load_avg_cpu(cpu_of(rq_of(cfs_rq)), cfs_rq);
+//	if (cfs_rq == &rq_of(cfs_rq)->cfs)
+//		trace_sched_load_avg_cpu(cpu_of(rq_of(cfs_rq)), cfs_rq);
 
 	if (update_freq && (decayed || removed_util))
 		cfs_rq_util_change(cfs_rq);
@@ -3299,7 +3299,7 @@ static inline void update_load_avg(struct sched_entity *se, int flags)
 #ifdef CONFIG_SCHED_WALT
 		ptr = (void *)&(task_of(se)->ravg);
 #endif
-		trace_sched_load_avg_task(task_of(se), &se->avg, ptr);
+//		trace_sched_load_avg_task(task_of(se), &se->avg, ptr);
 	}
 }
 
@@ -3624,7 +3624,7 @@ static void enqueue_sleeper(struct cfs_rq *cfs_rq, struct sched_entity *se)
 
 		if (tsk) {
 			account_scheduler_latency(tsk, delta >> 10, 1);
-			trace_sched_stat_sleep(tsk, delta);
+//			trace_sched_stat_sleep(tsk, delta);
 		}
 	}
 	if (se->statistics.block_start) {
@@ -3643,11 +3643,11 @@ static void enqueue_sleeper(struct cfs_rq *cfs_rq, struct sched_entity *se)
 			if (tsk->in_iowait) {
 				se->statistics.iowait_sum += delta;
 				se->statistics.iowait_count++;
-				trace_sched_stat_iowait(tsk, delta);
+//				trace_sched_stat_iowait(tsk, delta);
 			}
 
-			trace_sched_stat_blocked(tsk, delta);
-			trace_sched_blocked_reason(tsk);
+//			trace_sched_stat_blocked(tsk, delta);
+//			trace_sched_blocked_reason(tsk);
 
 			/*
 			 * Blocking time is in units of nanosecs, so shift by
@@ -6320,7 +6320,7 @@ boosted_cpu_util(int cpu)
 	unsigned long util = cpu_util_freq(cpu);
 	long margin = schedtune_cpu_margin(util, cpu);
 
-	trace_sched_boost_cpu(cpu, util, margin);
+//	trace_sched_boost_cpu(cpu, util, margin);
 
 	return util + margin;
 }
@@ -6331,7 +6331,7 @@ boosted_task_util(struct task_struct *p)
 	unsigned long util = task_util(p);
 	long margin = schedtune_task_margin(p);
 
-	trace_sched_boost_task(p, util, margin);
+//	trace_sched_boost_task(p, util, margin);
 
 	return util + margin;
 }
@@ -7031,9 +7031,9 @@ static inline int find_best_target(struct task_struct *p, int *backup_cpu,
 	 */
 
 	if (prefer_idle && (best_idle_cpu != -1)) {
-		trace_sched_find_best_target(p, prefer_idle, min_util, cpu,
-					     best_idle_cpu, best_active_cpu,
-					     best_idle_cpu);
+//		trace_sched_find_best_target(p, prefer_idle, min_util, cpu,
+//					     best_idle_cpu, best_active_cpu,
+//					     best_idle_cpu);
 
 		return best_idle_cpu;
 	}
@@ -7047,9 +7047,9 @@ static inline int find_best_target(struct task_struct *p, int *backup_cpu,
 		? best_active_cpu
 		: best_idle_cpu;
 
-	trace_sched_find_best_target(p, prefer_idle, min_util, cpu,
-				     best_idle_cpu, best_active_cpu,
-				     target_cpu);
+//	trace_sched_find_best_target(p, prefer_idle, min_util, cpu,
+//				     best_idle_cpu, best_active_cpu,
+//				     target_cpu);
 
 	schedstat_inc(p, se.statistics.nr_wakeups_fbt_count);
 	schedstat_inc(this_rq(), eas_stats.fbt_count);
@@ -9724,11 +9724,11 @@ out_one_pinned:
 
 	ld_moved = 0;
 out:
-	trace_sched_load_balance(this_cpu, idle, *continue_balancing,
-				 group ? group->cpumask[0] : 0,
-				 busiest ? busiest->nr_running : 0,
-				 env.imbalance, env.flags, ld_moved,
-				 sd->balance_interval);
+//	trace_sched_load_balance(this_cpu, idle, *continue_balancing,
+//				 group ? group->cpumask[0] : 0,
+//				 busiest ? busiest->nr_running : 0,
+//				 env.imbalance, env.flags, ld_moved,
+//				 sd->balance_interval);
 	return ld_moved;
 }
 
