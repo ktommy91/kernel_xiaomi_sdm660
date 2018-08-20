@@ -168,7 +168,7 @@ static void sugov_fast_switch(struct sugov_policy *sg_policy, u64 time,
 		return;
 
 	policy->cur = next_freq;
-	trace_cpu_frequency(next_freq, smp_processor_id());
+//	trace_cpu_frequency(next_freq, smp_processor_id());
 }
 
 static void sugov_deferred_update(struct sugov_policy *sg_policy, u64 time,
