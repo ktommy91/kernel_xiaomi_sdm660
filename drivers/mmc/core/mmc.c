@@ -2680,7 +2680,7 @@ out:
 static int mmc_suspend(struct mmc_host *host)
 {
 	int err;
-	ktime_t start = ktime_get();
+//	ktime_t start = ktime_get();
 
 	MMC_TRACE(host, "%s: Enter\n", __func__);
 	err = _mmc_suspend(host, true);
@@ -2689,8 +2689,8 @@ static int mmc_suspend(struct mmc_host *host)
 		pm_runtime_set_suspended(&host->card->dev);
 	}
 
-	trace_mmc_suspend(mmc_hostname(host), err,
-			ktime_to_us(ktime_sub(ktime_get(), start)));
+//	trace_mmc_suspend(mmc_hostname(host), err,
+//			ktime_to_us(ktime_sub(ktime_get(), start)));
 	MMC_TRACE(host, "%s: Exit err: %d\n", __func__, err);
 	return err;
 }
@@ -2765,7 +2765,7 @@ out:
 static int mmc_resume(struct mmc_host *host)
 {
 	int err = 0;
-	ktime_t start = ktime_get();
+//	ktime_t start = ktime_get();
 
 	MMC_TRACE(host, "%s: Enter\n", __func__);
 	if (!(host->caps & MMC_CAP_RUNTIME_RESUME)) {
@@ -2775,8 +2775,8 @@ static int mmc_resume(struct mmc_host *host)
 	}
 	pm_runtime_enable(&host->card->dev);
 
-	trace_mmc_resume(mmc_hostname(host), err,
-			ktime_to_us(ktime_sub(ktime_get(), start)));
+//	trace_mmc_resume(mmc_hostname(host), err,
+//			ktime_to_us(ktime_sub(ktime_get(), start)));
 	MMC_TRACE(host, "%s: Exit err: %d\n", __func__, err);
 	return err;
 }
@@ -2845,7 +2845,7 @@ unhalt:
 static int mmc_runtime_suspend(struct mmc_host *host)
 {
 	int err;
-	ktime_t start = ktime_get();
+//	ktime_t start = ktime_get();
 
 	if (!(host->caps & MMC_CAP_AGGRESSIVE_PM))
 		return 0;
@@ -2862,8 +2862,8 @@ static int mmc_runtime_suspend(struct mmc_host *host)
 		pr_err("%s: error %d doing aggressive suspend\n",
 			mmc_hostname(host), err);
 
-	trace_mmc_runtime_suspend(mmc_hostname(host), err,
-			ktime_to_us(ktime_sub(ktime_get(), start)));
+//	trace_mmc_runtime_suspend(mmc_hostname(host), err,
+//			ktime_to_us(ktime_sub(ktime_get(), start)));
 	return err;
 }
 
@@ -2873,7 +2873,7 @@ static int mmc_runtime_suspend(struct mmc_host *host)
 static int mmc_runtime_resume(struct mmc_host *host)
 {
 	int err;
-	ktime_t start = ktime_get();
+//	ktime_t start = ktime_get();
 
 	if (!(host->caps & (MMC_CAP_AGGRESSIVE_PM | MMC_CAP_RUNTIME_RESUME)))
 		return 0;
@@ -2884,8 +2884,8 @@ static int mmc_runtime_resume(struct mmc_host *host)
 		pr_err("%s: error %d doing aggressive resume\n",
 			mmc_hostname(host), err);
 
-	trace_mmc_runtime_resume(mmc_hostname(host), err,
-			ktime_to_us(ktime_sub(ktime_get(), start)));
+//	trace_mmc_runtime_resume(mmc_hostname(host), err,
+//			ktime_to_us(ktime_sub(ktime_get(), start)));
 
 	return err;
 }
