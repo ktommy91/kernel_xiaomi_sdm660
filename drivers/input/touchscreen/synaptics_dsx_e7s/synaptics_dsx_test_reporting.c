@@ -3574,35 +3574,27 @@ static int tddi_ratio_calculation(signed short *p_image)
 
 
 		p_data_16 = p_image;
-		for (i = 0; i < rx_num; i++) {
-			for (j = 0; j < left_size; j++) {
+		for (i, j = 0; i < rx_num, j < left_size; i++, j++) {
 				p_left_column_buf[i * left_size + j] = p_data_16[j * rx_num + i];
-			}
 		}
 
 		p_data_16 = p_image + left_size * rx_num;
-		for (i = 0; i < rx_num; i++) {
-			for (j = 0; j < right_size; j++) {
+		for (i, j = 0; i < rx_num, j < right_size; i++, j++) {
 				p_right_column_buf[i * right_size + j] = p_data_16[j * rx_num + i];
-			}
 		}
 	}
 	else {
 
 
 		p_data_16 = p_image;
-		for (i = 0; i < rx_num; i++) {
-			for (j = 0; j < right_size; j++) {
+		for (i, j = 0; i < rx_num, j < right_size; i++, j++) {
 				p_right_column_buf[i * right_size + j] = p_data_16[j * rx_num + i];
-			}
 		}
 
 		p_data_16 = p_image + right_size * rx_num;
-		for (i = 0; i < rx_num; i++) {
-			for (j = 0; j < left_size; j++) {
+		for (i, j = 0; i < rx_num, j < left_size; i++, j++) {
 				p_left_column_buf[i * left_size + j] = p_data_16[j * rx_num + i];
 			}
-		}
 	}
 
 
