@@ -39,7 +39,7 @@ static __read_mostly unsigned int walt_account_wait_time = 1;
 static __read_mostly unsigned int walt_freq_account_wait_time = 0;
 static __read_mostly unsigned int walt_io_is_busy = 1;
 
-unsigned int sysctl_sched_walt_init_task_load_pct = 15;
+unsigned int sysctl_sched_walt_init_task_load_pct = 100;
 
 /* true -> use PELT based load stats, false -> use window-based load stats */
 bool __read_mostly walt_disabled = false;
