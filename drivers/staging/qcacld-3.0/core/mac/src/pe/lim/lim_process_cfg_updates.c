@@ -155,8 +155,8 @@ void lim_handle_param_update(tpAniSirGlobal pMac, eUpdateIEsType cfgId)
 		msg.type = SIR_LIM_UPDATE_BEACON;
 		status = lim_post_msg_api(pMac, &msg);
 
-		if (status != TX_SUCCESS)
-			pe_err("Failed lim_post_msg_api %u", status);
+		if (status != TX_SUCCESS){
+			pe_err("Failed lim_post_msg_api %u", status);}
 			break;
 	}
 	default:
@@ -234,8 +234,8 @@ void lim_handle_cf_gparam_update(tpAniSirGlobal pMac, uint32_t cfgId)
 
 		status = lim_post_msg_api(pMac, &msg);
 
-		if (status != TX_SUCCESS)
-			pe_err("Failed lim_post_msg_api %u", status);
+		if (status != TX_SUCCESS){
+			pe_err("Failed lim_post_msg_api %u", status);}
 			break;
 	}
 
@@ -255,8 +255,8 @@ void lim_handle_cf_gparam_update(tpAniSirGlobal pMac, uint32_t cfgId)
 		pAmpduParamInfo->mpduDensity = (uint8_t) val2;
 		if (cfg_set_int
 			    (pMac, WNI_CFG_HT_AMPDU_PARAMS,
-			    *(uint8_t *) pAmpduParamInfo) != eSIR_SUCCESS)
-			pe_err("could not update HT AMPDU Param CFG");
+			    *(uint8_t *) pAmpduParamInfo) != eSIR_SUCCESS){
+			pe_err("could not update HT AMPDU Param CFG");}
 			break;
 	case WNI_CFG_MAX_RX_AMPDU_FACTOR:
 		if (wlan_cfg_get_int(pMac, WNI_CFG_HT_AMPDU_PARAMS, &val1) !=
@@ -274,8 +274,8 @@ void lim_handle_cf_gparam_update(tpAniSirGlobal pMac, uint32_t cfgId)
 		pAmpduParamInfo->maxRxAMPDUFactor = (uint8_t) val2;
 		if (cfg_set_int
 			    (pMac, WNI_CFG_HT_AMPDU_PARAMS,
-			    *(uint8_t *) pAmpduParamInfo) != eSIR_SUCCESS)
-			pe_err("could not update HT AMPDU Param CFG");
+			    *(uint8_t *) pAmpduParamInfo) != eSIR_SUCCESS){
+			pe_err("could not update HT AMPDU Param CFG");}
 			break;
 
 	case WNI_CFG_DOT11_MODE:
