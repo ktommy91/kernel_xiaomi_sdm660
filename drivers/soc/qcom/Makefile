@@ -57,8 +57,11 @@ ifdef CONFIG_MSM_SUBSYSTEM_RESTART
 	obj-y += ramdump.o
 	obj-$(CONFIG_MSM_GVM_QUIN) += subsystem_notif_virt.o
 endif
-
+ifdef CONFIG_KERNEL_CUSTOM_D2S
+obj-$(CONFIG_QPNP_HAPTIC) += qpnp-haptic_stock.o
+else
 obj-$(CONFIG_QPNP_HAPTIC) += qpnp-haptic.o
+endif 
 obj-$(CONFIG_QCOM_GSBI)	+=	qcom_gsbi.o
 obj-$(CONFIG_QCOM_CPUSS_DUMP) += cpuss_dump.o
 obj-$(CONFIG_QPNP_PBS) += qpnp-pbs.o
