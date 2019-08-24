@@ -205,7 +205,7 @@ static bool can_stop_full_tick(void)
 	 * sched_clock_stable is set.
 	 */
 	if (!sched_clock_stable()) {
-		trace_tick_stop(0, "unstable sched clock\n");
+		//trace_tick_stop(0, "unstable sched clock\n");
 		/*
 		 * Don't allow the user to think they can get
 		 * full NO_HZ with this machine.
