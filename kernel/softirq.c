@@ -118,7 +118,7 @@ void __local_bh_disable_ip(unsigned long ip, unsigned int cnt)
 	 * Were softirqs turned off above:
 	 */
 	if (softirq_count() == (cnt & SOFTIRQ_MASK))
-		trace_softirqs_off(ip);
+		//trace_softirqs_off(ip);
 	raw_local_irq_restore(flags);
 
 	if (preempt_count() == cnt) {
@@ -214,7 +214,7 @@ static inline bool lockdep_softirq_start(void)
 
 	if (trace_hardirq_context(current)) {
 		in_hardirq = true;
-		trace_hardirq_exit();
+		//trace_hardirq_exit();
 	}
 
 	lockdep_softirq_enter();
@@ -226,8 +226,8 @@ static inline void lockdep_softirq_end(bool in_hardirq)
 {
 	lockdep_softirq_exit();
 
-	if (in_hardirq)
-		trace_hardirq_enter();
+	//if (in_hardirq)
+	//	trace_hardirq_enter();
 }
 #else
 static inline bool lockdep_softirq_start(void) { return false; }

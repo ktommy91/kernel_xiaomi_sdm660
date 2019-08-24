@@ -3428,7 +3428,7 @@ static inline void update_load_avg(struct cfs_rq *cfs_rq, struct sched_entity *s
 #ifdef CONFIG_SCHED_WALT
 		ptr = (void *)&(task_of(se)->ravg);
 #endif
-		trace_sched_load_avg_task(task_of(se), &se->avg, ptr);
+		//trace_sched_load_avg_task(task_of(se), &se->avg, ptr);
 	}
 }
 
@@ -5184,7 +5184,7 @@ enqueue_task_fair(struct rq *rq, struct task_struct *p, int flags)
 		if (!task_new && !rq->rd->overutilized &&
 		    cpu_overutilized(rq->cpu)) {
 			rq->rd->overutilized = true;
-			trace_sched_overutilized(true);
+			//trace_sched_overutilized(true);
 		}
 	}
 
@@ -6099,11 +6099,11 @@ static inline int __energy_diff(struct energy_env *eenv)
 	eenv->nrg.diff = eenv->nrg.after - eenv->nrg.before;
 	eenv->payoff = 0;
 #ifndef CONFIG_SCHED_TUNE
-	trace_sched_energy_diff(eenv->task,
-			eenv->src_cpu, eenv->dst_cpu, eenv->util_delta,
-			eenv->nrg.before, eenv->nrg.after, eenv->nrg.diff,
-			eenv->cap.before, eenv->cap.after, eenv->cap.delta,
-			eenv->nrg.delta, eenv->payoff);
+	//trace_sched_energy_diff(eenv->task,
+	//		eenv->src_cpu, eenv->dst_cpu, eenv->util_delta,
+	//		eenv->nrg.before, eenv->nrg.after, eenv->nrg.diff,
+	//		eenv->cap.before, eenv->cap.after, eenv->cap.delta,
+	//		eenv->nrg.delta, eenv->payoff);
 #endif
 	/*
 	 * Dead-zone margin preventing too many migrations.
@@ -6177,11 +6177,11 @@ energy_diff(struct energy_env *eenv)
 
 	/* Return energy diff when boost margin is 0 */
 	if (boost == 0) {
-		trace_sched_energy_diff(eenv->task,
-				eenv->src_cpu, eenv->dst_cpu, eenv->util_delta,
-				eenv->nrg.before, eenv->nrg.after, eenv->nrg.diff,
-				eenv->cap.before, eenv->cap.after, eenv->cap.delta,
-				0, -eenv->nrg.diff);
+		//trace_sched_energy_diff(eenv->task,
+		//		eenv->src_cpu, eenv->dst_cpu, eenv->util_delta,
+		//		eenv->nrg.before, eenv->nrg.after, eenv->nrg.diff,
+		//		eenv->cap.before, eenv->cap.after, eenv->cap.delta,
+		//		0, -eenv->nrg.diff);
 		return eenv->nrg.diff;
 	}
 
@@ -6194,11 +6194,11 @@ energy_diff(struct energy_env *eenv)
 			eenv->cap.delta,
 			eenv->task);
 
-	trace_sched_energy_diff(eenv->task,
-			eenv->src_cpu, eenv->dst_cpu, eenv->util_delta,
-			eenv->nrg.before, eenv->nrg.after, eenv->nrg.diff,
-			eenv->cap.before, eenv->cap.after, eenv->cap.delta,
-			eenv->nrg.delta, eenv->payoff);
+	//trace_sched_energy_diff(eenv->task,
+	//		eenv->src_cpu, eenv->dst_cpu, eenv->util_delta,
+	//		eenv->nrg.before, eenv->nrg.after, eenv->nrg.diff,
+	//		eenv->cap.before, eenv->cap.after, eenv->cap.delta,
+	//		eenv->nrg.delta, eenv->payoff);
 
 	/*
 	 * When SchedTune is enabled, the energy_diff() function will return
@@ -9485,12 +9485,12 @@ next_group:
 		/* Update over-utilization (tipping point, U >= 0) indicator */
 		if (env->dst_rq->rd->overutilized != overutilized) {
 			env->dst_rq->rd->overutilized = overutilized;
-			trace_sched_overutilized(overutilized);
+			//trace_sched_overutilized(overutilized);
 		}
 	} else {
 		if (!env->dst_rq->rd->overutilized && overutilized) {
 			env->dst_rq->rd->overutilized = true;
-			trace_sched_overutilized(true);
+			//trace_sched_overutilized(true);
 		}
 	}
 
@@ -11256,7 +11256,7 @@ static void task_tick_fair(struct rq *rq, struct task_struct *curr, int queued)
 #ifdef CONFIG_SMP
 	if (!rq->rd->overutilized && cpu_overutilized(task_cpu(curr))) {
 		rq->rd->overutilized = true;
-		trace_sched_overutilized(true);
+		//trace_sched_overutilized(true);
 	}
 
 	rq->misfit_task = !task_fits_max(curr, rq->cpu);

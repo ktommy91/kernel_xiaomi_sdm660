@@ -2039,7 +2039,7 @@ try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags,
 
 		success = 1;
 		cpu = task_cpu(p);
-		trace_sched_waking(p);
+		//trace_sched_waking(p);
 		p->state = TASK_RUNNING;
 		trace_sched_wakeup(p);
 		goto out;
@@ -3311,10 +3311,10 @@ void preempt_count_sub(int val)
 		 * Trace preempt disable stack if preemption
 		 * is disabled for more than the threshold.
 		 */
-		if (delta > sysctl_preemptoff_tracing_threshold_ns)
-			trace_sched_preempt_disable(delta, ps->irqs_disabled,
-						ps->caddr[0], ps->caddr[1],
-						ps->caddr[2], ps->caddr[3]);
+		//if (delta > sysctl_preemptoff_tracing_threshold_ns)
+		//	trace_sched_preempt_disable(delta, ps->irqs_disabled,
+		//				ps->caddr[0], ps->caddr[1],
+		//				ps->caddr[2], ps->caddr[3]);
 
 //		trace_preempt_on(CALLER_ADDR0, get_parent_ip(CALLER_ADDR1));
 	}
@@ -5558,7 +5558,7 @@ void init_idle(struct task_struct *idle, int cpu)
 	 * The idle tasks have their own, simple scheduling class:
 	 */
 	idle->sched_class = &idle_sched_class;
-	ftrace_graph_init_idle_task(idle, cpu);
+	//ftrace_graph_init_idle_task(idle, cpu);
 	vtime_init_idle(idle, cpu);
 #ifdef CONFIG_SMP
 	sprintf(idle->comm, "%s/%d", INIT_TASK_COMM, cpu);
