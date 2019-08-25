@@ -1007,5 +1007,6 @@ qcom,mdss-dsi-srgb-on-command = [
 		qcom,mdss-tear-check-sync-init-val = <2160>;
 		qcom,mdss-tear-check-start-pos = <2160>;
 		qcom,mdss-tear-check-rd-ptr-trigger-intr = <2161>;
+		qcom,panel-ack-disabled;
 	};
 };
