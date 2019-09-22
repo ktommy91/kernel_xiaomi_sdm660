@@ -1111,9 +1111,6 @@ static int synaptics_rmi4_f11_abs_report(struct synaptics_rmi4_data *rmi4_data,
 	int temp;
 	struct synaptics_rmi4_f11_data_1_5 data;
 	struct synaptics_rmi4_f11_extra_data *extra_data;
-	struct sched_param param = { .sched_priority = MAX_USER_RT_PRIO / 2 };
-
-	sched_setscheduler(current, SCHED_FIFO, &param);
 
 	/*
 	 * The number of finger status registers is determined by the
