@@ -2673,7 +2673,7 @@ static void rcu_do_batch(struct rcu_state *rsp, struct rcu_data *rdp)
 	long bl, count;
 
 	/* If no callbacks are ready, just return. */
-//	if (!rcu_segcblist_ready_cbs(&rdp->cblist)) {
+	if (!rcu_segcblist_ready_cbs(&rdp->cblist)) {
 //		trace_rcu_batch_start(rsp->name,
 //				      rcu_segcblist_n_lazy_cbs(&rdp->cblist),
 //				      rcu_segcblist_n_cbs(&rdp->cblist), 0);
@@ -3730,7 +3730,7 @@ rcu_init_percpu_data(int cpu, struct rcu_state *rsp)
 	rdp->rcu_qs_ctr_snap = per_cpu(rcu_qs_ctr, cpu);
 	rdp->core_needs_qs = false;
 //	trace_rcu_grace_period(rsp->name, rdp->gpnum, TPS("cpuonl"));
-	raw_spin_unlock_irqrestore_rcu_node(rnp, flags); =======
+	raw_spin_unlock_irqrestore_rcu_node(rnp, flags);
 }
 
 static void rcu_prepare_cpu(int cpu)

@@ -165,7 +165,7 @@ static QDF_STATUS csr_sae_callback(tpAniSirGlobal mac_ctx,
 		tSirSmeRsp *msg_ptr)
 {
 	tCsrRoamInfo *roam_info;
-	uint32_t session_id;
+	uint32_t session_id=0;
 	struct sir_sae_info *sae_info;
 
 	sae_info = (struct sir_sae_info *) msg_ptr;
@@ -1166,7 +1166,7 @@ QDF_STATUS csr_start(tpAniSirGlobal pMac)
 
 QDF_STATUS csr_stop(tpAniSirGlobal pMac, tHalStopType stopType)
 {
-	uint32_t sessionId;
+	uint32_t sessionId=0;
 
 	for (sessionId = 0; sessionId < CSR_ROAM_SESSION_MAX; sessionId++)
 		csr_roam_close_session(pMac, sessionId, true, true, NULL, NULL);
@@ -1342,7 +1342,7 @@ static QDF_STATUS csr_roam_open(tpAniSirGlobal pMac)
 
 static QDF_STATUS csr_roam_close(tpAniSirGlobal pMac)
 {
-	uint32_t sessionId;
+	uint32_t sessionId=0;
 
 	for (sessionId = 0; sessionId < CSR_ROAM_SESSION_MAX; sessionId++)
 		csr_roam_close_session(pMac, sessionId, true, true, NULL, NULL);
@@ -10716,7 +10716,7 @@ void csr_roam_joined_state_msg_processor(tpAniSirGlobal pMac, void *pMsgBuf)
 		tSirSmeAssocIndToUpperLayerCnf *pUpperLayerAssocCnf;
 		tCsrRoamInfo roamInfo;
 		tCsrRoamInfo *pRoamInfo = NULL;
-		uint32_t sessionId;
+		uint32_t sessionId=0;
 		QDF_STATUS status;
 
 		sme_debug("ASSOCIATION confirmation can be given to upper layer ");
