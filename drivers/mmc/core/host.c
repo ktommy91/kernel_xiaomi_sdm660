@@ -643,11 +643,11 @@ struct mmc_host *mmc_alloc_host(int extra, struct device *dev)
 	 * They have to set these according to their abilities.
 	 */
 	host->max_segs = 1;
-	host->max_seg_size = PAGE_SIZE;
+	host->max_seg_size = PAGE_CACHE_SIZE;
 
-	host->max_req_size = PAGE_SIZE;
+	host->max_req_size = PAGE_CACHE_SIZE;
 	host->max_blk_size = 512;
-	host->max_blk_count = PAGE_SIZE / 512;
+	host->max_blk_count = PAGE_CACHE_SIZE / 512;
 
 	return host;
 }
@@ -895,7 +895,7 @@ int mmc_add_host(struct mmc_host *host)
 	mmc_add_host_debugfs(host);
 #endif
 	mmc_host_clk_sysfs_init(host);
-//	mmc_trace_init(host);
+	mmc_trace_init(host);
 
 	err = sysfs_create_group(&host->class_dev.kobj, &clk_scaling_attr_grp);
 	if (err)
