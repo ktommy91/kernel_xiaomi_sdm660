@@ -34,6 +34,7 @@
 #include "../pinconf.h"
 #include "pinctrl-msm.h"
 #include "../pinctrl-utils.h"
+#include <linux/spmi.h>
 
 #include <linux/wakeup_reason.h> /*Add-HMI_M6100_A01-60*/
 
